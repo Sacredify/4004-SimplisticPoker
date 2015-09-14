@@ -3,7 +3,7 @@ import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.entity.rank.HandRank;
-import ca.carleton.poker.service.PokerRankService;
+import ca.carleton.poker.service.rank.PokerRankService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Tests for {@link ca.carleton.poker.service.PokerRankService}
+ * Tests for {@link ca.carleton.poker.service.rank.PokerRankService}
  * <p>
  * Created by Mike on 14/09/2015.
  */

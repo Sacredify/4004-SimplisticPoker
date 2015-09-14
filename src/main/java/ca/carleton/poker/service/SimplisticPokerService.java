@@ -4,6 +4,7 @@ import ca.carleton.poker.entity.PokerHand;
 import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
+import ca.carleton.poker.service.rank.PokerRankService;
 
 import java.util.List;
 import java.util.StringTokenizer;

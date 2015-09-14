@@ -1,10 +1,10 @@
 package ca.carleton.poker.client;
 
 import ca.carleton.poker.entity.PokerHand;
-import ca.carleton.poker.service.PokerRankService;
 import ca.carleton.poker.service.SimplisticPokerService;
 import ca.carleton.poker.service.input.InputService;
 import ca.carleton.poker.service.input.impl.InputServiceFactory;
+import ca.carleton.poker.service.rank.PokerRankService;
 
 import java.util.ArrayList;
 import java.util.List;
