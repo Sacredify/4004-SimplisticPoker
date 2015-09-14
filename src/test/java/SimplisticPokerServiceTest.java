@@ -34,9 +34,10 @@ public class SimplisticPokerServiceTest {
 
     @Test
     public void canMakePokerHand() {
-        final String input = "AceSpades KingSpades QueenSpades JackSpades TenSpades";
+        final String input = "1 AceSpades KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
 
+        assertThat(hand.getPlayerId(), is(1));
         assertThat(hand, is(not(nullValue())));
         assertThat(hand.getCards().size(), is(5));
 
@@ -61,25 +62,25 @@ public class SimplisticPokerServiceTest {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("invalid token AceCookies");
 
-        final String input = "AceCookies KingSpades QueenSpades JackSpades TenSpades";
+        final String input = "1 AceCookies KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
     }
 
     @Test()
     public void canDetermineIllegalHand_two() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("input requires 5 space-delimited tokens");
+        this.expectedException.expectMessage("input requires 6 space-delimited tokens");
 
-        final String input = "AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades";
+        final String input = "1 AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades";
         final PokerHand hand = this.sut.makeHand(input);
     }
 
     @Test
     public void canDetermineIllegalHand_three() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("input requires 5 space-delimited tokens");
+        this.expectedException.expectMessage("input requires 6 space-delimited tokens");
 
-        final String input = "KingSpades QueenSpades JackSpades TenSpades";
+        final String input = "1 KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
     }
 
@@ -89,6 +90,15 @@ public class SimplisticPokerServiceTest {
         this.expectedException.expectMessage("input may not be null");
 
         final String input = null;
+        final PokerHand hand = this.sut.makeHand(input);
+    }
+
+    @Test
+    public void canDetermineIllegalHand_five() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("first token must be numeric player id");
+
+        final String input = "cookies KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
         final PokerHand hand = this.sut.makeHand(input);
     }
 
