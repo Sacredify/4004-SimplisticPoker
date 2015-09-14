@@ -6,6 +6,7 @@ import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.service.rank.PokerRankService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -62,10 +63,19 @@ public final class SimplisticPokerService {
 
         final PokerHand pokerHand = new PokerHand();
 
+        final List<String> existingTokens = new ArrayList<>();
+
         while (tokens.hasMoreTokens()) {
+
             final String token = tokens.nextToken();
 
+            // Check for existing tokens already used
+            if (existingTokens.contains(token)) {
+                throw new IllegalArgumentException("token " + token + " is invalid (possible duplicate card, etc.)");
+            }
+
             String tokenToCompare = token.toLowerCase();
+
             // First, find the rank of the input, if any.
             Rank tokenRank = null;
             for (final Rank rank : Rank.values()) {
@@ -93,6 +103,7 @@ public final class SimplisticPokerService {
                 throw new IllegalArgumentException("invalid token " + token);
             }
 
+            existingTokens.add(token);
             pokerHand.setPlayerId(playerId);
             pokerHand.addCard(new Card(tokenRank, tokenSuit));
         }
