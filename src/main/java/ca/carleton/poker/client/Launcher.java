@@ -21,24 +21,26 @@ public class Launcher {
     public static void main(final String[] args) {
         final InputService in = InputServiceFactory.getInputService();
 
-        final List<PokerHand> hands = new ArrayList<>(5);
-
         // TODO split into methods, validation
         while (true) {
+            final List<PokerHand> hands = new ArrayList<>(5);
             out.print("Enter number of players for this round (Q to quit) >>> ");
             final String input = in.getInput();
             if (input.equalsIgnoreCase("Q")) {
                 System.exit(0);
             }
             final int numberOfPlayers = Integer.parseInt(input);
-            out.println("\nBegin score data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
+            out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
             for (int i = 1; i <= numberOfPlayers; i++) {
-                out.print("Enter score data for player " + i + " >>>");
+                out.print("Enter data for player " + i + " >>>");
                 final String playerInput = in.getInput();
                 final PokerHand playerHand = pokerService.makeHand(playerInput);
                 hands.add(playerHand);
             }
-            System.out.println(hands);
+            // This can be done in one, but we'll split it up just for clarity's sake...
+            pokerService.assignPokerRanks(hands);
+            pokerService.sortAndSetFinalRankings(hands);
+            hands.forEach(System.out::println);
         }
 
     }

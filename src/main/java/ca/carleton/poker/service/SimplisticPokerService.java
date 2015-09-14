@@ -99,6 +99,15 @@ public final class SimplisticPokerService {
     }
 
     /**
+     * Give each poker hand a rank (five high, four of a kind, etc).
+     *
+     * @param pokerHands the list of hands.
+     */
+    public void assignPokerRanks(final List<PokerHand> pokerHands) {
+        pokerHands.forEach(this.pokerRankService::rankHand);
+    }
+
+    /**
      * Sorts the given list of hands into their final ranks, in descending order.
      * This method also sets the finalRanking int field in the case of ties, etc.
      *
