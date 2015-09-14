@@ -8,6 +8,8 @@ import ca.carleton.poker.entity.rank.HandRank;
 import ca.carleton.poker.entity.rank.PokerRank;
 import ca.carleton.poker.service.PokerRankService;
 import ca.carleton.poker.service.SimplisticPokerService;
+import ca.carleton.poker.service.input.InputService;
+import ca.carleton.poker.service.input.impl.InputServiceFactory;
 
 import java.util.Scanner;
 
@@ -18,8 +20,6 @@ import static java.lang.System.out;
  * Created by Mike on 14/09/2015.
  */
 public class Launcher {
-
-    private static final Scanner in = new Scanner(System.in);
 
     private static final SimplisticPokerService pokerService = new SimplisticPokerService(new PokerRankService());
 
@@ -35,7 +35,10 @@ public class Launcher {
 
         out.println(hand1);
         out.print("Hand input >>> ");
-        final String input = in.nextLine();
+
+        final InputService in = InputServiceFactory.getInputService();
+
+        final String input = in.getInput();
         final PokerHand hand = pokerService.makeHand(input);
     }
 }
