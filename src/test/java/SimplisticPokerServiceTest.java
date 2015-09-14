@@ -58,48 +58,57 @@ public class SimplisticPokerServiceTest {
     }
 
     @Test()
-    public void canDetermineIllegalHand_one() {
+    public void canDetermineIncorrectToken() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("invalid token AceCookies");
 
         final String input = "1 AceCookies KingSpades QueenSpades JackSpades TenSpades";
-        final PokerHand hand = this.sut.makeHand(input);
+        this.sut.makeHand(input);
     }
 
     @Test()
-    public void canDetermineIllegalHand_two() {
+    public void canDetermineIncorrectNumberOfTokens_one() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("input requires 6 space-delimited tokens");
 
         final String input = "1 AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades";
-        final PokerHand hand = this.sut.makeHand(input);
+        this.sut.makeHand(input);
     }
 
     @Test
-    public void canDetermineIllegalHand_three() {
+    public void canDetermineIncorrectNumberOfTokens_two() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("input requires 6 space-delimited tokens");
 
         final String input = "1 KingSpades QueenSpades JackSpades TenSpades";
-        final PokerHand hand = this.sut.makeHand(input);
+        this.sut.makeHand(input);
     }
 
     @Test
-    public void canDetermineIllegalHand_four() {
+    public void canDetermineIfInputIsNull() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("input may not be null");
 
         final String input = null;
-        final PokerHand hand = this.sut.makeHand(input);
+        this.sut.makeHand(input);
     }
 
     @Test
-    public void canDetermineIllegalHand_five() {
+    public void canDetermineIfPlayerIdInvalid() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("first token must be numeric player id");
 
         final String input = "cookies KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
-        final PokerHand hand = this.sut.makeHand(input);
+        this.sut.makeHand(input);
+    }
+
+    @Test
+    public void canDetermineIfDuplicateCardsAreUsed() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("token TenSpades is invalid (possible duplicate card, etc.)");
+
+        final String input = "1 KingSpades QueenSpades JackSpades TenSpades TenSpades";
+        this.sut.makeHand(input);
     }
 
     @Test
