@@ -22,6 +22,6 @@ public enum HandRank {
 
     @Override
     public String toString() {
-        return capitalize(this.name().toLowerCase());
+        return capitalize(this.name().toLowerCase().replaceAll("_", " "));
     }
 }

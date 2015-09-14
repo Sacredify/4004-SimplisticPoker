@@ -70,7 +70,7 @@ public class PokerHand {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(String.format("Hand for %d:\n", this.playerId));
+        builder.append(String.format("Hand for player %d:\n", this.playerId));
         for (final Card card : this.cards) {
             builder.append(String.format("\t%s\n", card));
         }

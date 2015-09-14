@@ -27,6 +27,11 @@ public class PokerRank implements Comparable<PokerRank> {
     }
 
     @Override
+    public String toString() {
+        return String.format("%s (high card: %s)", this.handRank, this.highCard);
+    }
+
+    @Override
     public int compareTo(final PokerRank rhs) {
         final int handRankResult = this.handRank.compareTo(rhs.getHandRank());
         if (handRankResult == 0) {
