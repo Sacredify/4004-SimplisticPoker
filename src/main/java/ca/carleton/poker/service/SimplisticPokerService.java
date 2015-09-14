@@ -4,7 +4,6 @@ import ca.carleton.poker.entity.PokerHand;
 import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
-import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.List;
 import java.util.StringTokenizer;
@@ -34,7 +33,7 @@ public final class SimplisticPokerService {
      * <p>
      * This method creates cards in the order they were input.
      * <p>
-     * Expected input is of the form "RankSuit RankSuit RankSuit RankSuit RankSuit"
+     * Expected input is of the form "PlayerId RankSuit RankSuit RankSuit RankSuit RankSuit"
      *
      * @param input the input.
      * @return the poker hand.
@@ -48,8 +47,16 @@ public final class SimplisticPokerService {
 
         final StringTokenizer tokens = new StringTokenizer(input, " ");
 
-        if (tokens.countTokens() != 5) {
-            throw new IllegalArgumentException("input requires 5 space-delimited tokens");
+        if (tokens.countTokens() != 6) {
+            throw new IllegalArgumentException("input requires 6 space-delimited tokens");
+        }
+
+        final String firstToken = tokens.nextToken();
+        final int playerId;
+        try {
+            playerId = Integer.parseInt(firstToken);
+        } catch (final NumberFormatException exception) {
+            throw new IllegalArgumentException("first token must be an integer player id");
         }
 
         final PokerHand pokerHand = new PokerHand();
@@ -85,6 +92,7 @@ public final class SimplisticPokerService {
                 throw new IllegalArgumentException("invalid token " + token);
             }
 
+            pokerHand.setPlayerId(playerId);
             pokerHand.addCard(new Card(tokenRank, tokenSuit));
         }
         return pokerHand;
