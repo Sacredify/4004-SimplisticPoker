@@ -37,7 +37,7 @@ public final class SimplisticPokerService {
      * Expected input is of the form "RankSuit RankSuit RankSuit RankSuit RankSuit"
      *
      * @param input the input.
-     * @return the String
+     * @return the poker hand.
      * @throws java.lang.IllegalArgumentException if an invalid string is passed in.
      */
     public PokerHand makeHand(final String input) throws IllegalArgumentException {

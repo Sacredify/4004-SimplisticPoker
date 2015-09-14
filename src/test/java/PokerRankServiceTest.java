@@ -41,4 +41,19 @@ public class PokerRankServiceTest {
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.ROYAL_FLUSH));
         assertThat(hand1.getPokerRank().getHighCard(), is(Rank.ACE));
     }
+
+    @Test
+    public void canRankStraight() {
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.ONE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.TWO, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.THREE, Suit.CLUBS));
+        hand1.addCard(new Card(Rank.FOUR, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.FIVE, Suit.SPADES));
+
+        this.sut.rankHand(hand1);
+        assertThat(hand1.getPokerRank(), is(not(nullValue())));
+        assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.STRAIGHT));
+        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.FIVE));
+    }
 }
