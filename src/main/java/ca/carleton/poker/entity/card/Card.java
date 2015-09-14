@@ -1,4 +1,4 @@
-package ca.carleton.poker.entity;
+package ca.carleton.poker.entity.card;
 
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;

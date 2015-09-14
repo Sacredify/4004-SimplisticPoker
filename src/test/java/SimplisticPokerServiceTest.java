@@ -1,5 +1,5 @@
 import ca.carleton.poker.entity.PokerHand;
-import ca.carleton.poker.entity.Card;
+import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.service.SimplisticPokerService;

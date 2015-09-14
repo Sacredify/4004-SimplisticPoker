@@ -1,5 +1,6 @@
 package ca.carleton.poker.entity;
 
+import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.ArrayList;
