@@ -1,5 +1,5 @@
 import ca.carleton.poker.entity.PokerHand;
-import ca.carleton.poker.entity.card.Card;
+import ca.carleton.poker.entity.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.service.SimplisticPokerService;
@@ -46,9 +46,9 @@ public class SimplisticPokerServiceTest {
 
         final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand1));
-        assertThat(sortedHand.get(0).getRanking(), is(1));
+        assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand2));
-        assertThat(sortedHand.get(1).getRanking(), is(2));
+        assertThat(sortedHand.get(1).getFinalRank(), is(2));
     }
 
     @Test
@@ -71,9 +71,9 @@ public class SimplisticPokerServiceTest {
 
         final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand1));
-        assertThat(sortedHand.get(0).getRanking(), is(1));
+        assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand2));
-        assertThat(sortedHand.get(1).getRanking(), is(1));
+        assertThat(sortedHand.get(1).getFinalRank(), is(1));
     }
 
     @Test
@@ -96,9 +96,9 @@ public class SimplisticPokerServiceTest {
 
         final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand2));
-        assertThat(sortedHand.get(0).getRanking(), is(1));
+        assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand1));
-        assertThat(sortedHand.get(1).getRanking(), is(2));
+        assertThat(sortedHand.get(1).getFinalRank(), is(2));
     }
 
 }

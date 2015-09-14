@@ -1,6 +1,6 @@
 package ca.carleton.poker.entity;
 
-import ca.carleton.poker.entity.card.Card;
+import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,11 @@ public class PokerHand {
     // The cards of the hand.
     private List<Card> cards;
 
-    // The final ranking of the poker hand (per-round).
-    private int ranking;
+    // The poker rank (aka the hand, straight flush, etc).
+    private PokerRank pokerRank;
+
+    // The final finalRank of the poker hand (per-round).
+    private int finalRank;
 
     public void addCard(final Card card) {
         if (this.cards == null) {
@@ -47,11 +50,30 @@ public class PokerHand {
         this.cards = cards;
     }
 
-    public int getRanking() {
-        return this.ranking;
+    public PokerRank getPokerRank() {
+        return this.pokerRank;
     }
 
-    public void setRanking(final int ranking) {
-        this.ranking = ranking;
+    public void setPokerRank(final PokerRank pokerRank) {
+        this.pokerRank = pokerRank;
+    }
+
+    public int getFinalRank() {
+        return this.finalRank;
+    }
+
+    public void setFinalRank(final int finalRank) {
+        this.finalRank = finalRank;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(String.format("Hand for %d:\n", this.playerId));
+        for (final Card card : this.cards) {
+            builder.append(String.format("\t%s\n", card));
+        }
+        builder.append(String.format("Final player rank: %d [%s]", this.finalRank, this.pokerRank));
+        return builder.toString();
     }
 }

@@ -24,14 +24,6 @@ public enum Rank {
     KING,
     ACE;
 
-    public boolean isLessThan(final Rank rank) {
-        return this.ordinal() < rank.ordinal();
-    }
-
-    public boolean isGreaterThan(final Rank rank) {
-        return this.ordinal() > rank.ordinal();
-    }
-
     @Override
     public String toString() {
         return capitalize(this.name().toLowerCase());

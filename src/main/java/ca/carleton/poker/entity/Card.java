@@ -1,4 +1,7 @@
-package ca.carleton.poker.entity.card;
+package ca.carleton.poker.entity;
+
+import ca.carleton.poker.entity.card.Rank;
+import ca.carleton.poker.entity.card.Suit;
 
 /**
  * Represents a playing card.
