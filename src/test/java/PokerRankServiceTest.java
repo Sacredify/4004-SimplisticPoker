@@ -3,14 +3,11 @@ import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.entity.rank.HandRank;
-import ca.carleton.poker.entity.rank.PokerRank;
 import ca.carleton.poker.service.PokerRankService;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
