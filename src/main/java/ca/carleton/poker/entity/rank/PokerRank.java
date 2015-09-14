@@ -11,6 +11,8 @@ public class PokerRank implements Comparable<PokerRank> {
 
     private final HandRank handRank;
 
+    // TODO replace with something that takes into consideration multiple high cards (three of a kind for example)
+    // probably like an integer value that adds the high cards or something
     private final Rank highCard;
 
     public PokerRank(final HandRank handRank, final Rank highCard) {
