@@ -77,6 +77,15 @@ public class SimplisticPokerServiceTest {
     }
 
     @Test
+    public void canDetermineIllegalHand_three() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("expected five cards to make hand");
+
+        final String input = "KingSpades QueenSpades JackSpades TenSpades";
+        final PokerHand hand = this.sut.makeHand(input);
+    }
+
+    @Test
     public void canOrderHands() {
         // Royal flush
         final PokerHand hand1 = new PokerHand();

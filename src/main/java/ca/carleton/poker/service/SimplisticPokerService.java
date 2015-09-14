@@ -34,6 +34,7 @@ public final class SimplisticPokerService {
      * @throws java.lang.IllegalArgumentException if an invalid string is passed in.
      */
     public PokerHand makeHand(final String input) throws IllegalArgumentException {
+
         return null;
     }
 

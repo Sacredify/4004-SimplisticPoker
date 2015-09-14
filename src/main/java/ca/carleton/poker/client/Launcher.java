@@ -11,8 +11,6 @@ import ca.carleton.poker.service.SimplisticPokerService;
 import ca.carleton.poker.service.input.InputService;
 import ca.carleton.poker.service.input.impl.InputServiceFactory;
 
-import java.util.Scanner;
-
 import static java.lang.System.out;
 
 /**
