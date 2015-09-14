@@ -1,8 +1,5 @@
 package ca.carleton.poker.entity.card;
 
-import ca.carleton.poker.entity.card.Rank;
-import ca.carleton.poker.entity.card.Suit;
-
 /**
  * Represents a playing card.
  *
@@ -10,12 +7,28 @@ import ca.carleton.poker.entity.card.Suit;
  */
 public class Card {
 
-    public Rank rank;
+    private Rank rank;
 
-    public Suit suit;
+    private Suit suit;
 
     public Card(final Rank rank, final Suit suit) {
         this.rank = rank;
+        this.suit = suit;
+    }
+
+    public Rank getRank() {
+        return this.rank;
+    }
+
+    public void setRank(final Rank rank) {
+        this.rank = rank;
+    }
+
+    public Suit getSuit() {
+        return this.suit;
+    }
+
+    public void setSuit(final Suit suit) {
         this.suit = suit;
     }
 

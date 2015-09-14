@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -25,6 +27,28 @@ public class SimplisticPokerServiceTest {
     @Before
     public void setUp() {
         this.sut = new SimplisticPokerService(new PokerRankService());
+    }
+
+    @Test
+    public void canMakePokerHand() {
+        final String input = "AceSpades KingSpades QueenSpades JackSpades TenSpades";
+        final PokerHand hand = this.sut.makeHand(input);
+        assertThat(hand, is(not(nullValue())));
+        assertThat(hand.getCards().size(), is(5));
+        assertThat(hand.getCards().get(0).getRank(), is(Rank.ACE));
+        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+
+        assertThat(hand.getCards().get(0).getRank(), is(Rank.KING));
+        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+
+        assertThat(hand.getCards().get(0).getRank(), is(Rank.QUEEN));
+        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+
+        assertThat(hand.getCards().get(0).getRank(), is(Rank.JACK));
+        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+
+        assertThat(hand.getCards().get(0).getRank(), is(Rank.TEN));
+        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
     }
 
     @Test

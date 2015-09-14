@@ -23,6 +23,19 @@ public final class SimplisticPokerService {
     }
 
     /**
+     * Create a new poker hand from the given string input.
+     * <p>
+     * This method creates cards in the order they were input.
+     *
+     * @param input the input.
+     * @return the String
+     * @throws java.lang.IllegalArgumentException if an invalid string is passed in.
+     */
+    public PokerHand makeHand(final String input) throws IllegalArgumentException {
+        return null;
+    }
+
+    /**
      * Sorts the given list of hands into their final ranks, in descending order.
      * This method also sets the finalRanking int field in the case of ties, etc.
      *
