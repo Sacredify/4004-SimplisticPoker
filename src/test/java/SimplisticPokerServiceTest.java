@@ -96,7 +96,7 @@ public class SimplisticPokerServiceTest {
     @Test
     public void canDetermineIfPlayerIdInvalid() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("first token must be numeric player id");
+        this.expectedException.expectMessage("first token must be an integer player id");
 
         final String input = "cookies KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
         this.sut.makeHand(input);
