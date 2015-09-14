@@ -64,15 +64,24 @@ public class PokerRankService {
         }
     };
 
-    private static final Consumer<PokerHand> applyStraightFlush = null;
-    private static final Consumer<PokerHand> applyFourOfAKind = null;
-    private static final Consumer<PokerHand> applyFullHouse = null;
-    private static final Consumer<PokerHand> applyFlush = null;
-    private static final Consumer<PokerHand> applyStraight = null;
-    private static final Consumer<PokerHand> applyThreeOfAKind = null;
-    private static final Consumer<PokerHand> applyTwoPair = null;
-    private static final Consumer<PokerHand> applyOnePair = null;
-    private static final Consumer<PokerHand> applyHighCard = null;
+    private static final Consumer<PokerHand> applyStraightFlush = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyFourOfAKind = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyFullHouse = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyFlush = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyStraight = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyThreeOfAKind = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyTwoPair = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyOnePair = pokerHand -> {
+    };
+    private static final Consumer<PokerHand> applyHighCard = pokerHand -> {
+    };
 
     private static Map<Rank, Integer> getRankFrequency(final List<Card> cards) {
         final Map<Rank, Integer> frequency = new HashMap<>();

@@ -30,7 +30,7 @@ public class PokerRank implements Comparable<PokerRank> {
 
     @Override
     public String toString() {
-        return String.format("%s (high card: %s)", this.handRank, this.highCard);
+        return String.format("%s (high card(s): %s)", this.handRank, this.highCard);
     }
 
     @Override
