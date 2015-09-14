@@ -86,6 +86,15 @@ public class SimplisticPokerServiceTest {
     }
 
     @Test
+    public void canDetermineIllegalHand_four() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("input may not be null");
+
+        final String input = null;
+        final PokerHand hand = this.sut.makeHand(input);
+    }
+
+    @Test
     public void canOrderHands() {
         // Royal flush
         final PokerHand hand1 = new PokerHand();
