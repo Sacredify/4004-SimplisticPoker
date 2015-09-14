@@ -5,7 +5,9 @@ import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.service.PokerRankService;
 import ca.carleton.poker.service.SimplisticPokerService;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by Mike on 14/09/2015.
  */
 public class SimplisticPokerServiceTest {
+
+    @Rule
+    public final ExpectedException expectedException = ExpectedException.none();
 
     private SimplisticPokerService sut;
 
@@ -51,6 +56,24 @@ public class SimplisticPokerServiceTest {
 
         assertThat(hand.getCards().get(4).getRank(), is(Rank.TEN));
         assertThat(hand.getCards().get(4).getSuit(), is(Suit.SPADES));
+    }
+
+    @Test()
+    public void canDetermineIllegalHand_one() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("illegal token AceCookies");
+
+        final String input = "AceCookies KingSpades QueenSpades JackSpades TenSpades";
+        final PokerHand hand = this.sut.makeHand(input);
+    }
+
+    @Test()
+    public void canDetermineIllegalHand_two() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("illegal token AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades");
+
+        final String input = "AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades";
+        final PokerHand hand = this.sut.makeHand(input);
     }
 
     @Test

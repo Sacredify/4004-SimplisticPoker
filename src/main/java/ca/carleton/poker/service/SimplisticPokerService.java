@@ -26,6 +26,8 @@ public final class SimplisticPokerService {
      * Create a new poker hand from the given string input.
      * <p>
      * This method creates cards in the order they were input.
+     * <p>
+     * Expected input is of the form "RankSuit RankSuit RankSuit RankSuit RankSuit"
      *
      * @param input the input.
      * @return the String
