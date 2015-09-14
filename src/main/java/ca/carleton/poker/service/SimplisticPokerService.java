@@ -3,6 +3,9 @@ package ca.carleton.poker.service;
 import ca.carleton.poker.entity.PokerHand;
 
 import java.util.List;
+import java.util.StringTokenizer;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Methods for the capture and determination of poker hand ranks.
@@ -34,6 +37,20 @@ public final class SimplisticPokerService {
      * @throws java.lang.IllegalArgumentException if an invalid string is passed in.
      */
     public PokerHand makeHand(final String input) throws IllegalArgumentException {
+
+        if (isEmpty(input)) {
+            throw new IllegalArgumentException("input may not be null");
+        }
+
+        final StringTokenizer tokens = new StringTokenizer(input, " ");
+
+        if (tokens.countTokens() != 5) {
+            throw new IllegalArgumentException("input requires 5 space-delimited hands");
+        }
+
+        while (tokens.hasMoreTokens()) {
+            final String token = tokens.nextToken();
+        }
 
         return null;
     }

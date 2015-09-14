@@ -79,7 +79,7 @@ public class SimplisticPokerServiceTest {
     @Test
     public void canDetermineIllegalHand_three() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("expected five cards to make hand");
+        this.expectedException.expectMessage("input requires 5 space-delimited hands");
 
         final String input = "KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
