@@ -76,4 +76,29 @@ public class SimplisticPokerServiceTest {
         assertThat(sortedHand.get(1).getRanking(), is(1));
     }
 
+    @Test
+    public void canOrderHandWithHighCardWinner() {
+        // Straight flush - fives high
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.ONE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.TWO, Suit.SPADES));
+        hand1.addCard(new Card(Rank.THREE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.FOUR, Suit.SPADES));
+        hand1.addCard(new Card(Rank.FIVE, Suit.SPADES));
+
+        // Straight flush - eights high
+        final PokerHand hand2 = new PokerHand();
+        hand2.addCard(new Card(Rank.FOUR, Suit.SPADES));
+        hand2.addCard(new Card(Rank.FIVE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.SIX, Suit.SPADES));
+        hand2.addCard(new Card(Rank.SEVEN, Suit.SPADES));
+        hand2.addCard(new Card(Rank.EIGHT, Suit.SPADES));
+
+        final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
+        assertThat(sortedHand.get(0), is(hand2));
+        assertThat(sortedHand.get(0).getRanking(), is(1));
+        assertThat(sortedHand.get(1), is(hand1));
+        assertThat(sortedHand.get(1).getRanking(), is(2));
+    }
+
 }
