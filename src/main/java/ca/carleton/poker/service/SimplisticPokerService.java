@@ -1,6 +1,9 @@
 package ca.carleton.poker.service;
 
 import ca.carleton.poker.entity.PokerHand;
+import ca.carleton.poker.entity.card.Card;
+import ca.carleton.poker.entity.card.Rank;
+import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.List;
@@ -49,15 +52,42 @@ public final class SimplisticPokerService {
             throw new IllegalArgumentException("input requires 5 space-delimited tokens");
         }
 
+        final PokerHand pokerHand = new PokerHand();
+
         while (tokens.hasMoreTokens()) {
             final String token = tokens.nextToken();
 
-            // First, we need to split the rank and suit and determine if its valid
+            String tokenToCompare = token.toLowerCase();
+            // First, find the rank of the input, if any.
+            Rank tokenRank = null;
+            for (final Rank rank : Rank.values()) {
+                final String rankValue = rank.toString().toLowerCase();
+                if (tokenToCompare.startsWith(rankValue)) {
+                    tokenRank = rank;
+                    tokenToCompare = tokenToCompare.replace(rankValue, "");
+                    break;
+                }
+            }
+            if (tokenRank == null) {
+                throw new IllegalArgumentException("invalid token " + token);
+            }
 
+            // Next, find the suit of the input, if any.
+            Suit tokenSuit = null;
+            for (final Suit suit : Suit.values()) {
+                final String suitValue = suit.toString().toLowerCase();
+                if (tokenToCompare.startsWith(suitValue)) {
+                    tokenSuit = suit;
+                    break;
+                }
+            }
+            if (tokenSuit == null) {
+                throw new IllegalArgumentException("invalid token " + token);
+            }
 
+            pokerHand.addCard(new Card(tokenRank, tokenSuit));
         }
-
-        return null;
+        return pokerHand;
     }
 
     /**

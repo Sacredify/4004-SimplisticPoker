@@ -61,7 +61,7 @@ public class SimplisticPokerServiceTest {
     @Test()
     public void canDetermineIllegalHand_one() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("illegal token AceCookies");
+        this.expectedException.expectMessage("invalid token AceCookies");
 
         final String input = "AceCookies KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
