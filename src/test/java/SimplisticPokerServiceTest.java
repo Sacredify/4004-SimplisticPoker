@@ -70,7 +70,7 @@ public class SimplisticPokerServiceTest {
     @Test()
     public void canDetermineIllegalHand_two() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("illegal token AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades");
+        this.expectedException.expectMessage("input requires 5 space-delimited tokens");
 
         final String input = "AceSpadesKingSpadesQueenSpadesJackSpadesTenSpades";
         final PokerHand hand = this.sut.makeHand(input);
@@ -79,7 +79,7 @@ public class SimplisticPokerServiceTest {
     @Test
     public void canDetermineIllegalHand_three() {
         this.expectedException.expect(IllegalArgumentException.class);
-        this.expectedException.expectMessage("input requires 5 space-delimited hands");
+        this.expectedException.expectMessage("input requires 5 space-delimited tokens");
 
         final String input = "KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);

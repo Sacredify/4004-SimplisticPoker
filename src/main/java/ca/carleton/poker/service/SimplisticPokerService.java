@@ -1,6 +1,7 @@
 package ca.carleton.poker.service;
 
 import ca.carleton.poker.entity.PokerHand;
+import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.List;
 import java.util.StringTokenizer;
@@ -45,11 +46,15 @@ public final class SimplisticPokerService {
         final StringTokenizer tokens = new StringTokenizer(input, " ");
 
         if (tokens.countTokens() != 5) {
-            throw new IllegalArgumentException("input requires 5 space-delimited hands");
+            throw new IllegalArgumentException("input requires 5 space-delimited tokens");
         }
 
         while (tokens.hasMoreTokens()) {
             final String token = tokens.nextToken();
+
+            // First, we need to split the rank and suit and determine if its valid
+
+
         }
 
         return null;
