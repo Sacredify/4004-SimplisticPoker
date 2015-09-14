@@ -27,7 +27,8 @@ public class SimplisticPokerServiceTest {
     }
 
     @Test
-    public void canOrderTwoEqualHands() {
+    public void canOrderHands() {
+        // Royal flush
         final PokerHand hand1 = new PokerHand();
         hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand1.addCard(new Card(Rank.KING, Suit.SPADES));
@@ -35,6 +36,32 @@ public class SimplisticPokerServiceTest {
         hand1.addCard(new Card(Rank.JACK, Suit.SPADES));
         hand1.addCard(new Card(Rank.TEN, Suit.SPADES));
 
+        // Random cards
+        final PokerHand hand2 = new PokerHand();
+        hand2.addCard(new Card(Rank.SEVEN, Suit.SPADES));
+        hand2.addCard(new Card(Rank.ONE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.SIX, Suit.SPADES));
+        hand2.addCard(new Card(Rank.NINE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.TEN, Suit.SPADES));
+
+        final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
+        assertThat(sortedHand.get(0), is(hand1));
+        assertThat(sortedHand.get(0).getRanking(), is(1));
+        assertThat(sortedHand.get(1), is(hand2));
+        assertThat(sortedHand.get(1).getRanking(), is(2));
+    }
+
+    @Test
+    public void canOrderTwoEqualHands() {
+        // Royal flush
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.KING, Suit.SPADES));
+        hand1.addCard(new Card(Rank.QUEEN, Suit.SPADES));
+        hand1.addCard(new Card(Rank.JACK, Suit.SPADES));
+        hand1.addCard(new Card(Rank.TEN, Suit.SPADES));
+
+        // Royal flush
         final PokerHand hand2 = new PokerHand();
         hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand2.addCard(new Card(Rank.KING, Suit.SPADES));
@@ -48,6 +75,5 @@ public class SimplisticPokerServiceTest {
         assertThat(sortedHand.get(1), is(hand2));
         assertThat(sortedHand.get(1).getRanking(), is(1));
     }
-
 
 }
