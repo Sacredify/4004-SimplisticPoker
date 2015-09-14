@@ -11,6 +11,11 @@ public class Card {
 
     public Suit suit;
 
+    public Card(final Rank rank, final Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
     @Override
     public String toString() {
         return String.format("%s of %s", this.rank, this.suit);
