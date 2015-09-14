@@ -12,9 +12,7 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -143,6 +141,32 @@ public class SimplisticPokerServiceTest {
         assertThat(sortedHand.get(1), is(hand2));
         assertThat(sortedHand.get(1).getFinalRank(), is(1));
     }
+
+    @Test
+    public void canOrderHandsOffHighCard() {
+        // Three of a kind - King - Jack (second place)
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+        hand1.addCard(new Card(Rank.KING, Suit.CLUBS));
+        hand1.addCard(new Card(Rank.JACK, Suit.CLUBS));
+
+        //  Three of a kind - King - Queen (highest possible)
+        final PokerHand hand2 = new PokerHand();
+        hand2.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+        hand2.addCard(new Card(Rank.KING, Suit.CLUBS));
+        hand2.addCard(new Card(Rank.QUEEN, Suit.CLUBS));
+
+        final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
+        assertThat(sortedHand.get(0), is(hand2));
+        assertThat(sortedHand.get(0).getFinalRank(), is(1));
+        assertThat(sortedHand.get(1), is(hand1));
+        assertThat(sortedHand.get(1).getFinalRank(), is(2));
+    }
+
 
     @Test
     public void canOrderHandWithHighCardWinner() {
