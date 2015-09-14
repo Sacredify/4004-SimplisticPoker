@@ -44,8 +44,10 @@ public class SimplisticPokerServiceTest {
 
         final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand1));
-        assertThat(sortedHand.get(0).ranking, is(1));
+        assertThat(sortedHand.get(0).getRanking(), is(1));
         assertThat(sortedHand.get(1), is(hand2));
-        assertThat(sortedHand.get(1).ranking, is(1));
+        assertThat(sortedHand.get(1).getRanking(), is(1));
     }
+
+
 }

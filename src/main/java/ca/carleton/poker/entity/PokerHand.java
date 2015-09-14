@@ -13,13 +13,13 @@ import java.util.List;
 public class PokerHand {
 
     // The player ID this hand is assigned to.
-    public int playerId;
+    private int playerId;
 
     // The cards of the hand.
-    public List<Card> cards;
+    private List<Card> cards;
 
     // The final ranking of the poker hand (per-round).
-    public int ranking;
+    private int ranking;
 
     public void addCard(final Card card) {
         if (this.cards == null) {
@@ -29,5 +29,29 @@ public class PokerHand {
             throw new IllegalStateException("hands may have up to 5 cards.");
         }
         this.cards.add(card);
+    }
+
+    public int getPlayerId() {
+        return this.playerId;
+    }
+
+    public void setPlayerId(final int playerId) {
+        this.playerId = playerId;
+    }
+
+    public List<Card> getCards() {
+        return this.cards;
+    }
+
+    public void setCards(final List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public int getRanking() {
+        return this.ranking;
+    }
+
+    public void setRanking(final int ranking) {
+        this.ranking = ranking;
     }
 }
