@@ -11,7 +11,14 @@ import java.util.List;
  */
 public final class SimplisticPokerService {
 
-    public List<PokerHand> sortAndRankHands(final List<PokerHand> hands) {
+    /**
+     * Sorts the given list of hands into their final ranks, in descending order.
+     * This method also sets the finalRanking int field in the case of ties, etc.
+     *
+     * @param hands the given hands.
+     * @return the sorted hands with their rank set.
+     */
+    public List<PokerHand> sortAndSetFinalRankings(final List<PokerHand> hands) {
         return null;
     }
 

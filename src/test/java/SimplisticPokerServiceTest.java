@@ -44,7 +44,7 @@ public class SimplisticPokerServiceTest {
         hand2.addCard(new Card(Rank.NINE, Suit.SPADES));
         hand2.addCard(new Card(Rank.TEN, Suit.SPADES));
 
-        final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
+        final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand1));
         assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand2));
@@ -69,7 +69,7 @@ public class SimplisticPokerServiceTest {
         hand2.addCard(new Card(Rank.JACK, Suit.SPADES));
         hand2.addCard(new Card(Rank.TEN, Suit.SPADES));
 
-        final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
+        final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand1));
         assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand2));
@@ -94,7 +94,7 @@ public class SimplisticPokerServiceTest {
         hand2.addCard(new Card(Rank.SEVEN, Suit.SPADES));
         hand2.addCard(new Card(Rank.EIGHT, Suit.SPADES));
 
-        final List<PokerHand> sortedHand = this.sut.sortAndRankHands(Arrays.asList(hand1, hand2));
+        final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand2));
         assertThat(sortedHand.get(0).getFinalRank(), is(1));
         assertThat(sortedHand.get(1), is(hand1));
