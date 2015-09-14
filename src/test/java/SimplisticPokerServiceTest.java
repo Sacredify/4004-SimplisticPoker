@@ -33,22 +33,24 @@ public class SimplisticPokerServiceTest {
     public void canMakePokerHand() {
         final String input = "AceSpades KingSpades QueenSpades JackSpades TenSpades";
         final PokerHand hand = this.sut.makeHand(input);
+
         assertThat(hand, is(not(nullValue())));
         assertThat(hand.getCards().size(), is(5));
+
         assertThat(hand.getCards().get(0).getRank(), is(Rank.ACE));
         assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
 
-        assertThat(hand.getCards().get(0).getRank(), is(Rank.KING));
-        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+        assertThat(hand.getCards().get(1).getRank(), is(Rank.KING));
+        assertThat(hand.getCards().get(1).getSuit(), is(Suit.SPADES));
 
-        assertThat(hand.getCards().get(0).getRank(), is(Rank.QUEEN));
-        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+        assertThat(hand.getCards().get(2).getRank(), is(Rank.QUEEN));
+        assertThat(hand.getCards().get(2).getSuit(), is(Suit.SPADES));
 
-        assertThat(hand.getCards().get(0).getRank(), is(Rank.JACK));
-        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+        assertThat(hand.getCards().get(3).getRank(), is(Rank.JACK));
+        assertThat(hand.getCards().get(3).getSuit(), is(Suit.SPADES));
 
-        assertThat(hand.getCards().get(0).getRank(), is(Rank.TEN));
-        assertThat(hand.getCards().get(0).getSuit(), is(Suit.SPADES));
+        assertThat(hand.getCards().get(4).getRank(), is(Rank.TEN));
+        assertThat(hand.getCards().get(4).getSuit(), is(Suit.SPADES));
     }
 
     @Test
