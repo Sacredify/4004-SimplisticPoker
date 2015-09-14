@@ -2,6 +2,7 @@ import ca.carleton.poker.entity.PokerHand;
 import ca.carleton.poker.entity.card.Card;
 import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.card.Suit;
+import ca.carleton.poker.service.PokerRankService;
 import ca.carleton.poker.service.SimplisticPokerService;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class SimplisticPokerServiceTest {
 
     @Before
     public void setUp() {
-        this.sut = new SimplisticPokerService();
+        this.sut = new SimplisticPokerService(new PokerRankService());
     }
 
     @Test
