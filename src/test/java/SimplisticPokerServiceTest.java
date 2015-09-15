@@ -124,7 +124,7 @@ public class SimplisticPokerServiceTest {
         // Random cards
         final PokerHand hand2 = new PokerHand();
         hand2.addCard(new Card(Rank.SEVEN, Suit.SPADES));
-        hand2.addCard(new Card(Rank.ONE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand2.addCard(new Card(Rank.SIX, Suit.SPADES));
         hand2.addCard(new Card(Rank.NINE, Suit.SPADES));
         hand2.addCard(new Card(Rank.TEN, Suit.SPADES));
@@ -191,7 +191,7 @@ public class SimplisticPokerServiceTest {
     public void canOrderHandWithHighCardWinner() {
         // Straight flush - fives high
         final PokerHand hand1 = new PokerHand();
-        hand1.addCard(new Card(Rank.ONE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand1.addCard(new Card(Rank.TWO, Suit.SPADES));
         hand1.addCard(new Card(Rank.THREE, Suit.SPADES));
         hand1.addCard(new Card(Rank.FOUR, Suit.SPADES));
