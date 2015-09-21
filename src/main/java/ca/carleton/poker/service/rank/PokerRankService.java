@@ -7,11 +7,11 @@ import ca.carleton.poker.entity.rank.HandRank;
 import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 
@@ -59,7 +59,7 @@ public class PokerRankService {
         }
 
         final boolean hasRanks = pokerHand.getCardRanksForHighCard().containsAll(
-                Arrays.asList(Rank.TEN,
+                asList(Rank.TEN,
                         Rank.JACK,
                         Rank.QUEEN,
                         Rank.KING,
@@ -105,6 +105,29 @@ public class PokerRankService {
     };
 
     private static final Consumer<PokerHand> checkFullHouse = pokerHand -> {
+        if (pokerHand.getPokerRank() != null) {
+            return;
+        }
+
+        final List<Card> copyOf = copyOf(pokerHand.getCards());
+        sort(copyOf, Card.Comparators.BY_RANK);
+
+        final boolean hasLowerThree = copyOf.get(0).getRank() == copyOf.get(1).getRank()
+                && copyOf.get(1).getRank() == copyOf.get(2).getRank()
+                && copyOf.get(3).getRank() == copyOf.get(4).getRank();
+
+        final boolean hasHigherThree = copyOf.get(0).getRank() == copyOf.get(1).getRank()
+                && copyOf.get(2).getRank() == copyOf.get(3).getRank()
+                && copyOf.get(3).getRank() == copyOf.get(4).getRank();
+
+        if (hasLowerThree) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.FULL_HOUSE,
+                    asList(copyOf.get(0).getRank(), copyOf.get(3).getRank())));
+        } else if (hasHigherThree) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.FULL_HOUSE,
+                    asList(copyOf.get(3).getRank(), copyOf.get(0).getRank())));
+        }
+
     };
 
     private static final Consumer<PokerHand> checkFlush = pokerHand -> {

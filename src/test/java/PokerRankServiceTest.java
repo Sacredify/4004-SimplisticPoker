@@ -128,12 +128,12 @@ public class PokerRankServiceTest {
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.FULL_HOUSE));
         assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.JACK));
-        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(1), is(Rank.ACE));
 
         assertThat(hand2.getPokerRank(), is(not(nullValue())));
         assertThat(hand2.getPokerRank().getHandRank(), is(HandRank.FULL_HOUSE));
         assertThat(hand2.getPokerRank().getHighCards().get(0), is(Rank.ACE));
-        assertThat(hand2.getPokerRank().getHighCards().get(0), is(Rank.JACK));
+        assertThat(hand2.getPokerRank().getHighCards().get(1), is(Rank.JACK));
     }
 
     @Test
