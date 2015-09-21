@@ -103,12 +103,34 @@ public class SimplisticPokerServiceTest {
     }
 
     @Test
+    public void canDetermineIfPlayerIdDuplicate() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("player id already in use");
+
+        final String input = "1 KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
+        final String input2 = "2 KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
+        this.sut.makeHand(input);
+        this.sut.makeHand(input);
+    }
+
+    @Test
     public void canDetermineIfDuplicateCardsAreUsed() {
         this.expectedException.expect(IllegalArgumentException.class);
         this.expectedException.expectMessage("token TenSpades is invalid (possible duplicate card, etc.)");
 
         final String input = "1 KingSpades QueenSpades JackSpades TenSpades TenSpades";
         this.sut.makeHand(input);
+    }
+
+    @Test
+    public void canDetermineIfDuplicateCardsAreUsedAcrossHands() {
+        this.expectedException.expect(IllegalArgumentException.class);
+        this.expectedException.expectMessage("token TenSpades is invalid (possible duplicate card, etc.)");
+
+        final String input = "1 KingSpades QueenSpades JackSpades TenSpades NineSpades";
+        final String input2 = "2 KingHearts QueenHearts JackHearts TenSpades NineHearts";
+        this.sut.makeHand(input);
+        this.sut.makeHand(input2);
     }
 
     @Test
