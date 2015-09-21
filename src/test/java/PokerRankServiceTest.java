@@ -227,5 +227,10 @@ public class PokerRankServiceTest {
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.HIGH_CARD));
         assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(1), is(Rank.KING));
+        assertThat(hand1.getPokerRank().getHighCards().get(2), is(Rank.QUEEN));
+        assertThat(hand1.getPokerRank().getHighCards().get(3), is(Rank.JACK));
+        assertThat(hand1.getPokerRank().getHighCards().get(4), is(Rank.NINE));
+
     }
 }
