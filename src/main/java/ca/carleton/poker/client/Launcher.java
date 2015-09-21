@@ -30,6 +30,10 @@ public class Launcher {
                 System.exit(0);
             }
             final int numberOfPlayers = Integer.parseInt(input);
+            if (numberOfPlayers < 2 || numberOfPlayers > 4) {
+                out.println("Number of players must be between 2 and 4!");
+                continue;
+            }
             out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
             for (int i = 1; i <= numberOfPlayers; i++) {
                 out.print("Enter data for player " + i + " >>>");
