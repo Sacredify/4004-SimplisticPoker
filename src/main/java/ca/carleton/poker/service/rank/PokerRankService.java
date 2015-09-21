@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
@@ -66,8 +65,7 @@ public class PokerRankService {
                 Rank.ACE);
         final boolean isAllSameSuit = isAllSameSuit(pokerHand.getCards());
         if (hasRanks && isAllSameSuit) {
-            final List<Rank> royalFlushHighCard = singletonList(pokerHand.getCards().get(0).getRank());
-            pokerHand.setPokerRank(new PokerRank(HandRank.ROYAL_FLUSH, royalFlushHighCard));
+            pokerHand.setPokerRank(new PokerRank(HandRank.ROYAL_FLUSH, pokerHand.getCardRanksForHighCard()));
         }
     };
 
@@ -77,7 +75,7 @@ public class PokerRankService {
         }
         final boolean isAllSameSuit = isAllSameSuit(pokerHand.getCards());
         if (isAllSameSuit && hasStraight(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT_FLUSH, null));
+            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT_FLUSH, pokerHand.getCardRanksForHighCard()));
         }
     };
 
@@ -92,7 +90,7 @@ public class PokerRankService {
             return;
         }
         if (isAllSameSuit(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.FLUSH, null));
+            pokerHand.setPokerRank(new PokerRank(HandRank.FLUSH, pokerHand.getCardRanksForHighCard()));
         }
     };
 
@@ -101,7 +99,7 @@ public class PokerRankService {
             return;
         }
         if (hasStraight(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT, null));
+            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT, pokerHand.getCardRanksForHighCard()));
         }
     };
 

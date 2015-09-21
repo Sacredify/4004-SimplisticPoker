@@ -1,10 +1,14 @@
 package ca.carleton.poker.entity;
 
 import ca.carleton.poker.entity.card.Card;
+import ca.carleton.poker.entity.card.Rank;
 import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.sort;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Represents a hand a poker player may have.
@@ -33,6 +37,12 @@ public class PokerHand {
             throw new IllegalStateException("hands may have up to 5 cards.");
         }
         this.cards.add(card);
+    }
+
+    public List<Rank> getCardRanksForHighCard() {
+        final List<Card> copyOf = new ArrayList<>(this.cards);
+        sort(copyOf, Card.Comparators.BY_RANK);
+        return copyOf.stream().map(Card::getRank).collect(toList());
     }
 
     public int getPlayerId() {
