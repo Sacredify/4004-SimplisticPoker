@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 
 /**
@@ -80,6 +81,27 @@ public class PokerRankService {
     };
 
     private static final Consumer<PokerHand> checkFourOfAKind = pokerHand -> {
+        if (pokerHand.getPokerRank() != null) {
+            return;
+        }
+
+        final List<Card> copyOf = copyOf(pokerHand.getCards());
+        sort(copyOf, Card.Comparators.BY_RANK);
+
+        final boolean hasHigherUnmatched = copyOf.get(0).getRank() == copyOf.get(1).getRank()
+                && copyOf.get(1).getRank() == copyOf.get(2).getRank()
+                && copyOf.get(2).getRank() == copyOf.get(3).getRank();
+
+        final boolean hasLowerUnmatched = copyOf.get(1).getRank() == copyOf.get(2).getRank()
+                && copyOf.get(2).getRank() == copyOf.get(3).getRank()
+                && copyOf.get(3).getRank() == copyOf.get(4).getRank();
+
+        if (hasHigherUnmatched) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.FOUR_OF_A_KIND, singletonList(copyOf.get(4).getRank())));
+        } else if (hasLowerUnmatched) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.FOUR_OF_A_KIND, singletonList(copyOf.get(0).getRank())));
+        }
+
     };
 
     private static final Consumer<PokerHand> checkFullHouse = pokerHand -> {
