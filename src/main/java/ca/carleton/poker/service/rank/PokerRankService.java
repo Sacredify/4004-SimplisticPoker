@@ -206,6 +206,38 @@ public class PokerRankService {
     };
 
     private static final Consumer<PokerHand> checkOnePair = pokerHand -> {
+        if (pokerHand.getPokerRank() != null) {
+            return;
+        }
+
+        final List<Card> copyOf = copyOf(pokerHand.getCards());
+        sort(copyOf, Card.Comparators.BY_RANK);
+
+        final boolean hasLowerTwos = copyOf.get(0).getRank() == copyOf.get(1).getRank();
+
+        final boolean hasLowerMiddleTwos = copyOf.get(1).getRank() == copyOf.get(2).getRank();
+
+        final boolean hasHigherMiddle = copyOf.get(2).getRank() == copyOf.get(3).getRank();
+
+        final boolean hasHigherTwos = copyOf.get(3).getRank() == copyOf.get(4).getRank();
+
+        if (hasLowerTwos) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.ONE_PAIR, asList(copyOf.get(2).getRank(),
+                    copyOf.get(3).getRank(),
+                    copyOf.get(4).getRank())));
+        } else if (hasLowerMiddleTwos) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.ONE_PAIR, asList(copyOf.get(0).getRank(),
+                    copyOf.get(3).getRank(),
+                    copyOf.get(4).getRank())));
+        } else if (hasHigherMiddle) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.ONE_PAIR, asList(copyOf.get(0).getRank(),
+                    copyOf.get(1).getRank(),
+                    copyOf.get(4).getRank())));
+        } else if (hasHigherTwos) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.ONE_PAIR, asList(copyOf.get(0).getRank(),
+                    copyOf.get(1).getRank(),
+                    copyOf.get(2).getRank())));
+        }
     };
 
     private static final Consumer<PokerHand> checkHighCard = pokerHand -> {
