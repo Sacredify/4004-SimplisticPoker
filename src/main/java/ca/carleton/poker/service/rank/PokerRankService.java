@@ -241,6 +241,10 @@ public class PokerRankService {
     };
 
     private static final Consumer<PokerHand> checkHighCard = pokerHand -> {
+        if (pokerHand.getPokerRank() != null) {
+            return;
+        }
+
         pokerHand.setPokerRank(new PokerRank(HandRank.HIGH_CARD, pokerHand.getCardRanksForHighCard()));
     };
 
