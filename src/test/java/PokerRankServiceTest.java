@@ -209,7 +209,9 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.ONE_PAIR));
-        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.TWO));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.KING));
+        assertThat(hand1.getPokerRank().getHighCards().get(1), is(Rank.SEVEN));
+        assertThat(hand1.getPokerRank().getHighCards().get(2), is(Rank.FIVE));
     }
 
     @Test
