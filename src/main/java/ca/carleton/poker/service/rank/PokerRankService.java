@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
@@ -65,7 +66,8 @@ public class PokerRankService {
                 Rank.ACE);
         final boolean isAllSameSuit = isAllSameSuit(pokerHand.getCards());
         if (hasRanks && isAllSameSuit) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.ROYAL_FLUSH, getHighCard(pokerHand.getCards())));
+            final List<Rank> royalFlushHighCard = singletonList(pokerHand.getCards().get(0).getRank());
+            pokerHand.setPokerRank(new PokerRank(HandRank.ROYAL_FLUSH, royalFlushHighCard));
         }
     };
 
@@ -75,7 +77,7 @@ public class PokerRankService {
         }
         final boolean isAllSameSuit = isAllSameSuit(pokerHand.getCards());
         if (isAllSameSuit && hasStraight(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT_FLUSH, getHighCard(pokerHand.getCards())));
+            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT_FLUSH, null));
         }
     };
 
@@ -90,7 +92,7 @@ public class PokerRankService {
             return;
         }
         if (isAllSameSuit(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.FLUSH, getHighCard(pokerHand.getCards())));
+            pokerHand.setPokerRank(new PokerRank(HandRank.FLUSH, null));
         }
     };
 
@@ -99,7 +101,7 @@ public class PokerRankService {
             return;
         }
         if (hasStraight(pokerHand.getCards())) {
-            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT, getHighCard(pokerHand.getCards())));
+            pokerHand.setPokerRank(new PokerRank(HandRank.STRAIGHT, null));
         }
     };
 
@@ -114,19 +116,6 @@ public class PokerRankService {
 
     private static final Consumer<PokerHand> checkHighCard = pokerHand -> {
     };
-
-    /**
-     * Helper code to get the high card (for tiebreakers or single card) of a list of cards.
-     *
-     * @param cards the cards.
-     * @return the high rank.
-     */
-    private static Rank getHighCard(final List<Card> cards) {
-        final List<Card> copyOf = copyOf(cards);
-        sort(copyOf, Card.Comparators.BY_RANK);
-        final List<Rank> cardRanks = copyOf.stream().map(Card::getRank).collect(toList());
-        return cardRanks.get(0);
-    }
 
     /**
      * Helper code to see if the frequency contains the given ranks.
