@@ -36,7 +36,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.ROYAL_FLUSH));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.STRAIGHT_FLUSH));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.FOUR_OF_A_KIND));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.SEVEN));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.SEVEN));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.FULL_HOUSE));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.JACK));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.JACK));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.FLUSH));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.JACK));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.JACK));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.STRAIGHT));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.FIVE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.FIVE));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.THREE_OF_A_KIND));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.TWO_PAIR));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.FOUR));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.FOUR));
     }
 
     @Test
@@ -156,7 +156,7 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.ONE_PAIR));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.TWO));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.TWO));
     }
 
     @Test
@@ -171,6 +171,6 @@ public class PokerRankServiceTest {
         this.sut.rankHand(hand1);
         assertThat(hand1.getPokerRank(), is(not(nullValue())));
         assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.HIGH_CARD));
-        assertThat(hand1.getPokerRank().getHighCard(), is(Rank.ACE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
     }
 }

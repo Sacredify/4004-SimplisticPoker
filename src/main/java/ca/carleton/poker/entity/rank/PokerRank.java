@@ -2,6 +2,8 @@ package ca.carleton.poker.entity.rank;
 
 import ca.carleton.poker.entity.card.Rank;
 
+import java.util.List;
+
 /**
  * A rank for a hand.
  *
@@ -11,33 +13,39 @@ public class PokerRank implements Comparable<PokerRank> {
 
     private final HandRank handRank;
 
-    // TODO replace with something that takes into consideration multiple high cards (three of a kind for example)
-    // probably like an integer value that adds the high cards or something
-    private final Rank highCard;
+    private final List<Rank> highCards;
 
-    public PokerRank(final HandRank handRank, final Rank highCard) {
+    public PokerRank(final HandRank handRank, final List<Rank> highCards) {
         this.handRank = handRank;
-        this.highCard = highCard;
+        this.highCards = highCards;
     }
 
     public HandRank getHandRank() {
         return this.handRank;
     }
 
-    public Rank getHighCard() {
-        return this.highCard;
+    public List<Rank> getHighCards() {
+        return this.highCards;
     }
 
     @Override
     public String toString() {
-        return String.format("%s (high card(s): %s)", this.handRank, this.highCard);
+        return String.format("%s (high card(s): %s)", this.handRank, this.highCards);
     }
 
     @Override
     public int compareTo(final PokerRank rhs) {
         final int handRankResult = this.handRank.compareTo(rhs.getHandRank());
         if (handRankResult == 0) {
-            return this.highCard.compareTo(rhs.getHighCard());
+            for (final Rank currentRank : this.highCards) {
+                for (final Rank otherRank : rhs.getHighCards()) {
+                    final int currentHighCardRank = currentRank.compareTo(otherRank);
+                    if (currentHighCardRank != 0) {
+                        return currentHighCardRank;
+                    }
+                }
+            }
+            return 0;
         } else {
             return handRankResult;
         }
