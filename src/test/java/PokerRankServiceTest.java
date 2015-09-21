@@ -7,6 +7,8 @@ import ca.carleton.poker.service.rank.PokerRankService;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -22,6 +24,26 @@ public class PokerRankServiceTest {
     @Before
     public void setUp() {
         this.sut = new PokerRankService();
+    }
+
+    @Test
+    public void canGetHighCardsForHand() {
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.TEN, Suit.SPADES));
+        hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.QUEEN, Suit.SPADES));
+        hand1.addCard(new Card(Rank.KING, Suit.SPADES));
+        hand1.addCard(new Card(Rank.JACK, Suit.SPADES));
+
+        this.sut.rankHand(hand1);
+        assertThat(hand1.getPokerRank(), is(not(nullValue())));
+        assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.ROYAL_FLUSH));
+        final List<Rank> highCards = hand1.getCardRanksForHighCard();
+        assertThat(highCards.get(0), is(Rank.ACE));
+        assertThat(highCards.get(1), is(Rank.KING));
+        assertThat(highCards.get(2), is(Rank.QUEEN));
+        assertThat(highCards.get(3), is(Rank.JACK));
+        assertThat(highCards.get(4), is(Rank.TEN));
     }
 
     @Test
