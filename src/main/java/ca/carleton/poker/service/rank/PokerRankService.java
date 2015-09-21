@@ -149,6 +149,33 @@ public class PokerRankService {
     };
 
     private static final Consumer<PokerHand> checkThreeOfAKind = pokerHand -> {
+        if (pokerHand.getPokerRank() != null) {
+            return;
+        }
+
+        final List<Card> copyOf = copyOf(pokerHand.getCards());
+        sort(copyOf, Card.Comparators.BY_RANK);
+
+        final boolean hasLowerThree = copyOf.get(0).getRank() == copyOf.get(1).getRank()
+                && copyOf.get(1).getRank() == copyOf.get(2).getRank();
+
+        final boolean hasMiddleThree = copyOf.get(1).getRank() == copyOf.get(2).getRank()
+                && copyOf.get(2).getRank() == copyOf.get(3).getRank();
+
+        final boolean hasHigherThree = copyOf.get(2).getRank() == copyOf.get(3).getRank()
+                && copyOf.get(3).getRank() == copyOf.get(4).getRank();
+
+        if (hasLowerThree) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.THREE_OF_A_KIND,
+                    asList(copyOf.get(3).getRank(), copyOf.get(4).getRank())));
+        } else if (hasMiddleThree) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.THREE_OF_A_KIND,
+                    asList(copyOf.get(0).getRank(), copyOf.get(4).getRank())));
+        } else if (hasHigherThree) {
+            pokerHand.setPokerRank(new PokerRank(HandRank.THREE_OF_A_KIND,
+                    asList(copyOf.get(0).getRank(), copyOf.get(1).getRank())));
+        }
+
     };
 
     private static final Consumer<PokerHand> checkTwoPair = pokerHand -> {
