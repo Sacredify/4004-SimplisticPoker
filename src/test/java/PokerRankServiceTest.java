@@ -107,6 +107,36 @@ public class PokerRankServiceTest {
     }
 
     @Test
+    public void canRankFullHousesHighCard() {
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.JACK, Suit.SPADES));
+        hand1.addCard(new Card(Rank.JACK, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.JACK, Suit.DIAMONDS));
+
+        final PokerHand hand2 = new PokerHand();
+        hand2.addCard(new Card(Rank.JACK, Suit.SPADES));
+        hand2.addCard(new Card(Rank.JACK, Suit.HEARTS));
+        hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        hand2.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+
+        this.sut.rankHand(hand1);
+        this.sut.rankHand(hand2);
+
+        assertThat(hand1.getPokerRank(), is(not(nullValue())));
+        assertThat(hand1.getPokerRank().getHandRank(), is(HandRank.FULL_HOUSE));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.JACK));
+        assertThat(hand1.getPokerRank().getHighCards().get(0), is(Rank.ACE));
+
+        assertThat(hand2.getPokerRank(), is(not(nullValue())));
+        assertThat(hand2.getPokerRank().getHandRank(), is(HandRank.FULL_HOUSE));
+        assertThat(hand2.getPokerRank().getHighCards().get(0), is(Rank.ACE));
+        assertThat(hand2.getPokerRank().getHighCards().get(0), is(Rank.JACK));
+    }
+
+    @Test
     public void canRankFlush() {
         final PokerHand hand1 = new PokerHand();
         hand1.addCard(new Card(Rank.JACK, Suit.SPADES));
