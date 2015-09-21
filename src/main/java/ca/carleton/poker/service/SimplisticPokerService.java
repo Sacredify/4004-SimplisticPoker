@@ -21,6 +21,10 @@ public final class SimplisticPokerService {
 
     private final PokerRankService pokerRankService;
 
+    private static final List<String> roundCardCache = new ArrayList<>();
+
+    private static final List<String> roundPlayerIdCache = new ArrayList<>();
+
     /**
      * Constructor dependency injection...why do I not have spring?
      *
@@ -28,6 +32,31 @@ public final class SimplisticPokerService {
      */
     public SimplisticPokerService(final PokerRankService pokerRankService) {
         this.pokerRankService = pokerRankService;
+    }
+
+    /**
+     * Clear the caches.
+     */
+    public void clearCaches() {
+        roundCardCache.clear();
+        roundPlayerIdCache.clear();
+    }
+
+    private static void checkPlayerIdExists(final String playerId) {
+        if (roundPlayerIdCache.contains(playerId)) {
+            throw new IllegalArgumentException("player id already in use");
+        } else {
+            roundPlayerIdCache.add(playerId);
+        }
+    }
+
+    private static void checkCardExists(final String card) {
+        if (roundCardCache.contains(card)) {
+            throw new IllegalArgumentException(String.format("token %s is invalid (possible duplicate card, etc.)",
+                    card));
+        } else {
+            roundCardCache.add(card);
+        }
     }
 
     /**
@@ -55,6 +84,7 @@ public final class SimplisticPokerService {
 
         final String firstToken = tokens.nextToken();
         final int playerId;
+        checkPlayerIdExists(firstToken);
         try {
             playerId = Integer.parseInt(firstToken);
         } catch (final NumberFormatException exception) {
@@ -63,17 +93,12 @@ public final class SimplisticPokerService {
 
         final PokerHand pokerHand = new PokerHand();
 
-        final List<String> existingTokens = new ArrayList<>();
-
         while (tokens.hasMoreTokens()) {
 
             final String token = tokens.nextToken();
 
             // Check for existing tokens already used
-            if (existingTokens.contains(token)) {
-                throw new IllegalArgumentException("token " + token + " is invalid (possible duplicate card, etc.)");
-            }
-
+            checkCardExists(token);
             String tokenToCompare = token.toLowerCase();
 
             // First, find the rank of the input, if any.
@@ -103,7 +128,6 @@ public final class SimplisticPokerService {
                 throw new IllegalArgumentException("invalid token " + token);
             }
 
-            existingTokens.add(token);
             pokerHand.setPlayerId(playerId);
             pokerHand.addCard(new Card(tokenRank, tokenSuit));
         }

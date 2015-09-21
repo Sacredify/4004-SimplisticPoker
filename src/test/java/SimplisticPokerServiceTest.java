@@ -108,9 +108,9 @@ public class SimplisticPokerServiceTest {
         this.expectedException.expectMessage("player id already in use");
 
         final String input = "1 KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
-        final String input2 = "2 KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
+        final String input2 = "1 KingSpades QueenSpades JackSpades TenSpades TenDiamonds";
         this.sut.makeHand(input);
-        this.sut.makeHand(input);
+        this.sut.makeHand(input2);
     }
 
     @Test

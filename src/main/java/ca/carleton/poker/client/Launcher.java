@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.out;
+
 /**
  * Main class.
  * Created by Mike on 14/09/2015.
@@ -21,30 +22,34 @@ public class Launcher {
     public static void main(final String[] args) {
         final InputService in = InputServiceFactory.getInputService();
 
-        // TODO split into methods, validation
         while (true) {
-            final List<PokerHand> hands = new ArrayList<>(5);
-            out.print("Enter number of players for this round (Q to quit) >>> ");
-            final String input = in.getInput();
-            if (input.equalsIgnoreCase("Q")) {
-                System.exit(0);
+            try {
+                pokerService.clearCaches();
+                final List<PokerHand> hands = new ArrayList<>(5);
+                out.print("Enter number of players for this round (Q to quit) >>> ");
+                final String input = in.getInput();
+                if (input.equalsIgnoreCase("Q")) {
+                    System.exit(0);
+                }
+                final int numberOfPlayers = Integer.parseInt(input);
+                if (numberOfPlayers < 2 || numberOfPlayers > 4) {
+                    out.println("Number of players must be between 2 and 4!");
+                    continue;
+                }
+                out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
+                for (int i = 1; i <= numberOfPlayers; i++) {
+                    out.print("Enter data for player " + i + " >>>");
+                    final String playerInput = in.getInput();
+                    final PokerHand playerHand = pokerService.makeHand(playerInput);
+                    hands.add(playerHand);
+                }
+                // This can be done in one, but we'll split it up just for clarity's sake...
+                pokerService.assignPokerRanks(hands);
+                pokerService.sortAndSetFinalRankings(hands);
+                hands.forEach(System.out::println);
+            } catch (final IllegalArgumentException exception) {
+                exception.printStackTrace();
             }
-            final int numberOfPlayers = Integer.parseInt(input);
-            if (numberOfPlayers < 2 || numberOfPlayers > 4) {
-                out.println("Number of players must be between 2 and 4!");
-                continue;
-            }
-            out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
-            for (int i = 1; i <= numberOfPlayers; i++) {
-                out.print("Enter data for player " + i + " >>>");
-                final String playerInput = in.getInput();
-                final PokerHand playerHand = pokerService.makeHand(playerInput);
-                hands.add(playerHand);
-            }
-            // This can be done in one, but we'll split it up just for clarity's sake...
-            pokerService.assignPokerRanks(hands);
-            pokerService.sortAndSetFinalRankings(hands);
-            hands.forEach(System.out::println);
         }
 
     }
