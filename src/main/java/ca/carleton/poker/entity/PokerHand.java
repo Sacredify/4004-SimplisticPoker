@@ -39,6 +39,11 @@ public class PokerHand {
         this.cards.add(card);
     }
 
+    /**
+     * Gets the list of ranks for this hand, sorted in decreasing order.
+     *
+     * @return the list of card ranks.
+     */
     public List<Rank> getCardRanksForHighCard() {
         final List<Card> copyOf = new ArrayList<>(this.cards);
         sort(copyOf, Card.Comparators.BY_RANK);

@@ -7,13 +7,12 @@ import ca.carleton.poker.entity.rank.HandRank;
 import ca.carleton.poker.entity.rank.PokerRank;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
 import static java.util.Collections.sort;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 
 /**
  * Service to determine poker ranks for a hand.
@@ -57,12 +56,13 @@ public class PokerRankService {
         if (pokerHand.getPokerRank() != null) {
             return;
         }
-        final boolean hasRanks = containsRanks(pokerHand.getCards(),
-                Rank.TEN,
-                Rank.JACK,
-                Rank.QUEEN,
-                Rank.KING,
-                Rank.ACE);
+
+        final boolean hasRanks = pokerHand.getCardRanksForHighCard().containsAll(
+                Arrays.asList(Rank.TEN,
+                        Rank.JACK,
+                        Rank.QUEEN,
+                        Rank.KING,
+                        Rank.ACE));
         final boolean isAllSameSuit = isAllSameSuit(pokerHand.getCards());
         if (hasRanks && isAllSameSuit) {
             pokerHand.setPokerRank(new PokerRank(HandRank.ROYAL_FLUSH, pokerHand.getCardRanksForHighCard()));
@@ -114,22 +114,6 @@ public class PokerRankService {
 
     private static final Consumer<PokerHand> checkHighCard = pokerHand -> {
     };
-
-    /**
-     * Helper code to see if the frequency contains the given ranks.
-     */
-    private static boolean containsRanks(final List<Card> cards, final Rank... ranks) {
-        if (isEmpty(ranks)) {
-            return false;
-        }
-        final List<Rank> cardRanks = cards.stream().map(Card::getRank).collect(toList());
-        for (final Rank rank : ranks) {
-            if (!cardRanks.contains(rank)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Helper method - create a copy of the list to use with sorting.
