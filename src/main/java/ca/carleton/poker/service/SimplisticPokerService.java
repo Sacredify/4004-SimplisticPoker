@@ -7,9 +7,12 @@ import ca.carleton.poker.entity.card.Suit;
 import ca.carleton.poker.service.rank.PokerRankService;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import static java.util.Collections.reverse;
+import static java.util.Collections.sort;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
@@ -147,11 +150,30 @@ public final class SimplisticPokerService {
      * Sorts the given list of hands into their final ranks, in descending order.
      * This method also sets the finalRanking int field in the case of ties, etc.
      *
-     * @param hands the given hands.
+     * @param pokerHands the given hands.
      * @return the sorted hands with their rank set.
      */
-    public List<PokerHand> sortAndSetFinalRankings(final List<PokerHand> hands) {
-        return null;
+    public List<PokerHand> sortAndSetFinalRankings(final List<PokerHand> pokerHands) {
+        this.assignPokerRanks(pokerHands);
+        final Comparator<PokerHand> pokerHandComparator = (hand1, hand2) -> hand1.getPokerRank()
+                .compareTo(hand2.getPokerRank());
+
+        sort(pokerHands, pokerHandComparator);
+        reverse(pokerHands);
+
+        int rank = 2;
+        pokerHands.get(0).setFinalRank(1);
+        for (int i = 1; i < pokerHands.size(); i++) {
+            final PokerHand currentHand = pokerHands.get(i);
+            // Need to check to see if equal hands...
+            final PokerHand previousHand = pokerHands.get(i - 1);
+            if (currentHand.equals(previousHand)) {
+                currentHand.setFinalRank(previousHand.getFinalRank());
+            } else {
+                currentHand.setFinalRank(rank++);
+            }
+        }
+        return pokerHands;
     }
 
 }

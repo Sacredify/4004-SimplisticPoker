@@ -92,4 +92,13 @@ public class PokerHand {
         builder.append(String.format("Final player rank: %d [%s]", this.finalRank, this.pokerRank));
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(final Object other) {
+        if (!(other instanceof PokerHand)) {
+            return false;
+        }
+        final PokerHand rhs = (PokerHand) other;
+        return this.pokerRank.equals(rhs.getPokerRank());
+    }
 }

@@ -30,6 +30,7 @@ public class SimplisticPokerServiceTest {
     @Before
     public void setUp() {
         this.sut = new SimplisticPokerService(new PokerRankService());
+        this.sut.clearCaches();
     }
 
     @Test

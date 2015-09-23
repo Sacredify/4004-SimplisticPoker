@@ -43,10 +43,9 @@ public class Launcher {
                     final PokerHand playerHand = pokerService.makeHand(playerInput);
                     hands.add(playerHand);
                 }
-                // This can be done in one, but we'll split it up just for clarity's sake...
-                pokerService.assignPokerRanks(hands);
                 pokerService.sortAndSetFinalRankings(hands);
-                hands.forEach(System.out::println);
+                out.println("==== RESULTS ====");
+                hands.forEach(out::println);
             } catch (final IllegalArgumentException exception) {
                 exception.printStackTrace();
             }
