@@ -62,10 +62,6 @@ public class PokerHand {
         return this.cards;
     }
 
-    public void setCards(final List<Card> cards) {
-        this.cards = cards;
-    }
-
     public PokerRank getPokerRank() {
         return this.pokerRank;
     }
@@ -89,7 +85,7 @@ public class PokerHand {
         for (final Card card : this.cards) {
             builder.append(String.format("\t%s\n", card));
         }
-        builder.append(String.format("Final player rank: %d [%s]", this.finalRank, this.pokerRank));
+        builder.append(String.format("Final player rank: %d. Hand: %s", this.finalRank, this.pokerRank));
         return builder.toString();
     }
 

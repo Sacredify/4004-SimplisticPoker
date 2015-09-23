@@ -44,8 +44,9 @@ public class Launcher {
                     hands.add(playerHand);
                 }
                 pokerService.sortAndSetFinalRankings(hands);
-                out.println("==== RESULTS ====");
+                out.println("==== BEGIN RESULTS ====");
                 hands.forEach(out::println);
+                out.println("==== END RESULTS ====\n");
             } catch (final IllegalArgumentException exception) {
                 exception.printStackTrace();
             }
