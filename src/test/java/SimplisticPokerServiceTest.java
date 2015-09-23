@@ -17,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Tests for {@link ca.carleton.poker.service.SimplisticPokerService}
- *
+ * <p>
  * Created by Mike on 14/09/2015.
  */
 public class SimplisticPokerServiceTest {
@@ -191,16 +191,16 @@ public class SimplisticPokerServiceTest {
         hand1.addCard(new Card(Rank.ACE, Suit.HEARTS));
         hand1.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand1.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
-        hand1.addCard(new Card(Rank.KING, Suit.CLUBS));
         hand1.addCard(new Card(Rank.JACK, Suit.CLUBS));
+        hand1.addCard(new Card(Rank.QUEEN, Suit.CLUBS));
 
         //  Three of a kind - King - Queen (highest possible)
         final PokerHand hand2 = new PokerHand();
         hand2.addCard(new Card(Rank.ACE, Suit.HEARTS));
         hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand2.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+        hand2.addCard(new Card(Rank.TEN, Suit.CLUBS));
         hand2.addCard(new Card(Rank.KING, Suit.CLUBS));
-        hand2.addCard(new Card(Rank.QUEEN, Suit.CLUBS));
 
         final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
         assertThat(sortedHand.get(0), is(hand2));
@@ -210,6 +210,34 @@ public class SimplisticPokerServiceTest {
         assertThat(sortedHand.get(1).getFinalRank(), is(2));
         assertThat(sortedHand.get(1).getPokerRank().getHighCards().size(), is(2));
     }
+
+    @Test
+    public void canOrderHandsOffHighCard_two() {
+        // Three of a kind - King - Jack (second place)
+        final PokerHand hand1 = new PokerHand();
+        hand1.addCard(new Card(Rank.TWO, Suit.HEARTS));
+        hand1.addCard(new Card(Rank.FIVE, Suit.SPADES));
+        hand1.addCard(new Card(Rank.THREE, Suit.DIAMONDS));
+        hand1.addCard(new Card(Rank.FOUR, Suit.CLUBS));
+        hand1.addCard(new Card(Rank.SIX, Suit.CLUBS));
+
+        //  Three of a kind - King - Queen (highest possible)
+        final PokerHand hand2 = new PokerHand();
+        hand2.addCard(new Card(Rank.SIX, Suit.HEARTS));
+        hand2.addCard(new Card(Rank.FOUR, Suit.SPADES));
+        hand2.addCard(new Card(Rank.THREE, Suit.DIAMONDS));
+        hand2.addCard(new Card(Rank.SEVEN, Suit.CLUBS));
+        hand2.addCard(new Card(Rank.FIVE, Suit.CLUBS));
+
+        final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
+        assertThat(sortedHand.get(0), is(hand2));
+        assertThat(sortedHand.get(0).getFinalRank(), is(1));
+        assertThat(sortedHand.get(0).getPokerRank().getHighCards().size(), is(5));
+        assertThat(sortedHand.get(1), is(hand1));
+        assertThat(sortedHand.get(1).getFinalRank(), is(2));
+        assertThat(sortedHand.get(1).getPokerRank().getHighCards().size(), is(5));
+    }
+
 
 
     @Test

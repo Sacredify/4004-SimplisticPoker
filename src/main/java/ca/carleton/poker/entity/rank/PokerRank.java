@@ -37,12 +37,12 @@ public class PokerRank implements Comparable<PokerRank> {
     public int compareTo(final PokerRank rhs) {
         final int handRankResult = this.handRank.compareTo(rhs.getHandRank());
         if (handRankResult == 0) {
-            for (final Rank currentRank : this.highCards) {
-                for (final Rank otherRank : rhs.getHighCards()) {
-                    final int currentHighCardRank = currentRank.compareTo(otherRank);
-                    if (currentHighCardRank != 0) {
-                        return currentHighCardRank;
-                    }
+            for (int i = 0; i < this.highCards.size(); i++) {
+                final Rank thisHighCard = this.highCards.get(i);
+                final Rank otherHighCard = rhs.getHighCards().get(i);
+                final int currentHighCardRank = thisHighCard.compareTo(otherHighCard);
+                if (currentHighCardRank != 0) {
+                    return currentHighCardRank;
                 }
             }
             return 0;
