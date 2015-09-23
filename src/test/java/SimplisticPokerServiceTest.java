@@ -231,9 +231,9 @@ public class SimplisticPokerServiceTest {
         hand2.addCard(new Card(Rank.EIGHT, Suit.SPADES));
 
         final List<PokerHand> sortedHand = this.sut.sortAndSetFinalRankings(Arrays.asList(hand1, hand2));
-        assertThat(sortedHand.get(0), is(hand2));
+        assertThat(sortedHand.get(0), is(hand1));
         assertThat(sortedHand.get(0).getFinalRank(), is(1));
-        assertThat(sortedHand.get(1), is(hand1));
+        assertThat(sortedHand.get(1), is(hand2));
         assertThat(sortedHand.get(1).getFinalRank(), is(2));
     }
 
