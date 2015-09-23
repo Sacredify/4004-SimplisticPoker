@@ -238,8 +238,6 @@ public class SimplisticPokerServiceTest {
         assertThat(sortedHand.get(1).getPokerRank().getHighCards().size(), is(5));
     }
 
-
-
     @Test
     public void canOrderHandWithHighCardWinner() {
         // Straight flush - fives high
