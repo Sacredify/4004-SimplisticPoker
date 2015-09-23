@@ -9,6 +9,7 @@ Test details:
 Tests regarding the ranking of hands are located in PokerRankServiceTest
 Tests regarding the validation of input and sorting of final hands are in SimplisticPokerServiceTest
 Tests regarding the gathering of input from the user are in InputServiceTest
+Tests that try and cover the minimum requirements as listed in JP's email are in MinimalCoverTest.
 
 To build this project using maven (note: test failures will still result in a build attempt):
 
