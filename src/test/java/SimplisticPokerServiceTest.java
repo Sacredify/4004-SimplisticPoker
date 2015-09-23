@@ -213,7 +213,7 @@ public class SimplisticPokerServiceTest {
 
     @Test
     public void canOrderHandsOffHighCard_two() {
-        // Three of a kind - King - Jack (second place)
+        // Straight - six high
         final PokerHand hand1 = new PokerHand();
         hand1.addCard(new Card(Rank.TWO, Suit.HEARTS));
         hand1.addCard(new Card(Rank.FIVE, Suit.SPADES));
@@ -221,7 +221,7 @@ public class SimplisticPokerServiceTest {
         hand1.addCard(new Card(Rank.FOUR, Suit.CLUBS));
         hand1.addCard(new Card(Rank.SIX, Suit.CLUBS));
 
-        //  Three of a kind - King - Queen (highest possible)
+        //  Straight - seven high
         final PokerHand hand2 = new PokerHand();
         hand2.addCard(new Card(Rank.SIX, Suit.HEARTS));
         hand2.addCard(new Card(Rank.FOUR, Suit.SPADES));
