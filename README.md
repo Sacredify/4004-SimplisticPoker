@@ -31,3 +31,30 @@ Basically, one tries to follow the pattern of:
 1. Write (initially failing) unit test around a piece of functionality.
 2. Write the code for that functionality.
 3. Test should now be passing. Rinse and repeat for new code, bug fixes, etc.
+
+Example output:
+
+    Begin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)
+    Rank and Suit must follow names outlined in the Rank/Suit enumerations!
+    Enter data for player 1 >>>1 AceSpades QueenSpades TenSpades JackSpades KingSpades
+    Enter data for player 2 >>>2 AceHearts KingHearts QueenHearts TenHearts JackHearts
+    ==== BEGIN RESULTS ====
+    Hand for player 2:
+        Ace of Hearts
+        King of Hearts
+        Queen of Hearts
+        Ten of Hearts
+        Jack of Hearts
+    Final player rank: 1. Hand: Royal flush (high card(s): [Ace, King, Queen, Jack, Ten])
+    Hand for player 1:
+        Ace of Spades
+        Queen of Spades
+        Ten of Spades
+        Jack of Spades
+        King of Spades
+    Final player rank: 1. Hand: Royal flush (high card(s): [Ace, King, Queen, Jack, Ten])
+    ==== END RESULTS ====
+
+    Enter number of players for this round (Q to quit) >>> q
+
+    Process finished with exit code 0

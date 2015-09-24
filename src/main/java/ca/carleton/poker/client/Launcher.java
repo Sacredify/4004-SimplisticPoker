@@ -33,7 +33,7 @@ public class Launcher {
                 }
                 final int numberOfPlayers = Integer.parseInt(input);
                 if (numberOfPlayers < 2 || numberOfPlayers > 4) {
-                    out.println("Number of players must be between 2 and 4!");
+                    out.println("ERR: Number of players must be between 2 and 4.\n");
                     continue;
                 }
                 out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
@@ -50,7 +50,7 @@ public class Launcher {
                 out.println("==== END RESULTS ====\n");
             } catch (final IllegalArgumentException exception) {
                 out.print("ERR: ");
-                out.println(exception.getMessage());
+                out.println(exception.getMessage() + "\n");
             }
         }
 
