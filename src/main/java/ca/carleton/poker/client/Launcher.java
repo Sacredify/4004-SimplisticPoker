@@ -37,6 +37,7 @@ public class Launcher {
                     continue;
                 }
                 out.println("\nBegin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)");
+                out.println("Rank and Suit must follow names outlined in the Rank/Suit enumerations!");
                 for (int i = 1; i <= numberOfPlayers; i++) {
                     out.print("Enter data for player " + i + " >>>");
                     final String playerInput = in.getInput();
