@@ -48,7 +48,8 @@ public class Launcher {
                 hands.forEach(out::println);
                 out.println("==== END RESULTS ====\n");
             } catch (final IllegalArgumentException exception) {
-                exception.printStackTrace();
+                out.print("ERR: ");
+                out.println(exception.getMessage());
             }
         }
 
