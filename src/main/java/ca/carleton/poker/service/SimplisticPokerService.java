@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import static java.lang.Integer.compare;
 import static java.util.Collections.reverse;
 import static java.util.Collections.sort;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -173,6 +174,15 @@ public final class SimplisticPokerService {
                 currentHand.setFinalRank(rank++);
             }
         }
+
+        // Sort by final ranking and/or player id.
+        final Comparator<PokerHand> finalComparator = (hand1, hand2) -> {
+            final int rankResult = compare(hand1.getFinalRank(), (hand2.getFinalRank()));
+            return rankResult == 0 ? compare(hand1.getPlayerId(), hand2.getPlayerId()) : rankResult;
+        };
+
+        sort(pokerHands, finalComparator);
+
         return pokerHands;
     }
 
