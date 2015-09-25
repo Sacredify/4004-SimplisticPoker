@@ -12,14 +12,29 @@ Tests that try and cover the minimum requirements as listed in JP's email are in
 
 To build this project using maven (note: test failures will still result in a build attempt):
 
-mvn clean install
+    mvn clean install
 
 To run the tests only:
 
-mvn clean test
+    mvn clean test
+    
+To run the file:
+
+    cd target
+    java -jar SimplisticPoker-1.0-SNAPSHOT.jar
 
 If you don't have maven, it should still be possible to import the project in your IDE of choice and build from in there, or
 manually if you prefer (although who does that?).
+
+    One can also do the following:
+    
+    apt-get install git
+    apt-get install maven
+    apt-get install openjdk-8-jdk
+    
+    git clone https://github.com/Sacredify/4004-SimplisticPoker.git
+    cd 4004-SimplisticPoker
+    mvn clean test
 
 Written with intellij idea for Jean-Pierre's Fall 2015 run of COMP4004.
 
