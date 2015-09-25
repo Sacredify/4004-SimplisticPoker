@@ -47,7 +47,7 @@ Basically, one tries to follow the pattern of:
 2. Write the code for that functionality.
 3. Test should now be passing. Rinse and repeat for new code, bug fixes, etc.
 
-Example output:
+Example output with two players:
 
     Enter number of players for this round (Q to quit) >>> 1 AceSpades QueenSpades TenSpades JackSpades KingSpades
     ERR: For input string: "1 AceSpades QueenSpades TenSpades JackSpades KingSpades"
@@ -78,3 +78,36 @@ Example output:
     Enter number of players for this round (Q to quit) >>> q
 
     Process finished with exit code 0
+    
+Example output with three players:
+
+    Enter number of players for this round (Q to quit) >>> 3
+    
+    Begin entering hand data (format: playerId RankSuit RankSuit RankSuit RankSuit RankSuit)
+    Rank and Suit must follow names outlined in the Rank/Suit enumerations!
+    Enter data for player 1 >>>1 AceHearts TwoHearts ThreeDiamonds KingHearts KingClubs
+    Enter data for player 2 >>>2 NineDiamonds QueenHearts FiveSpades SevenSpades ThreeSpades
+    Enter data for player 3 >>>3 EightDiamonds SixClubs EightClubs JackHearts TenSpades
+    ==== BEGIN RESULTS ====
+    Hand for player 1:
+    	Ace of Hearts
+    	Two of Hearts
+    	Three of Diamonds
+    	King of Hearts
+    	King of Clubs
+    Final player rank: 1. Hand: One pair (high card(s): [Ace, Three, Two])
+    Hand for player 3:
+    	Eight of Diamonds
+    	Six of Clubs
+    	Eight of Clubs
+    	Jack of Hearts
+    	Ten of Spades
+    Final player rank: 2. Hand: One pair (high card(s): [Jack, Ten, Six])
+    Hand for player 2:
+    	Nine of Diamonds
+    	Queen of Hearts
+    	Five of Spades
+    	Seven of Spades
+    	Three of Spades
+    Final player rank: 3. Hand: High card (high card(s): [Queen, Nine, Seven, Five, Three])
+    ==== END RESULTS ====
