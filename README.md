@@ -2,13 +2,15 @@
 
 Michael Hum - 100883995 - https://github.com/Sacredify
 
-Tests regarding the ranking of hands are located in PokerRankServiceTest.
+Tests regarding the ranking of hands are located in PokerRankServiceTest. Tests for each individual poker hand are included. 
 
 Tests regarding the validation of input and sorting of final hands are in SimplisticPokerServiceTest.
 
 Tests regarding the gathering of input from the user are in InputServiceTest.
 
 Tests that try and cover the minimum requirements as listed in JP's email are in MinimalCoverTest.
+
+The tests are named to reflect their purpose... don't make me write out pointless information for what you can see in the output. 
 
 To build this project using maven (note: test failures will still result in a build attempt):
 
